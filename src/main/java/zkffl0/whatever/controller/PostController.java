@@ -21,12 +21,23 @@ public class PostController {
 
     @RegisterResApi
     @RegisterReqApi
-    @PostMapping("/post-info")
+    @PostMapping("/create")
     public ResponseEntity<?> createPost(@RequestBody PostReqDto postReqDto) {
         try {
-            return ResponseEntity.status(HttpStatus.OK)
+            return ResponseEntity.status(HttpStatus.CREATED) // PostMapping - HttpStatus.CREATED, GetMapping, PutMapping - HttpStatus.ok
                     .body(postService.createPost(postReqDto));
-        } catch  (NotFoundException e) {
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> updatePost(@PathVariable("id") Long id, @RequestBody PostReqDto postReqDto) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(postService.updatePost(id, postReqDto));
+        } catch (NotFoundException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(e.getMessage());
         }
