@@ -17,7 +17,7 @@ public class PostService {
     private final PostRepository postRepository;
 
     @Transactional
-    public PostResDto registerInfo(PostReqDto postReqDto) throws NotFoundException {
+    public PostResDto createPost(PostReqDto postReqDto) throws NotFoundException {
         Post post = Post.builder()
                 .title(postReqDto.getTitle())
                 .content(postReqDto.getContent())

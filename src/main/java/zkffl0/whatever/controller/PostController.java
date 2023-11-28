@@ -22,15 +22,14 @@ public class PostController {
     @RegisterResApi
     @RegisterReqApi
     @PostMapping("/post-info")
-    public ResponseEntity<?> registerInfo(@RequestBody PostReqDto postReqDto) {
+    public ResponseEntity<?> createPost(@RequestBody PostReqDto postReqDto) {
         try {
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(postService.registerInfo(postReqDto));
+                    .body(postService.createPost(postReqDto));
         } catch  (NotFoundException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(e.getMessage());
         }
-
     }
 
 }
