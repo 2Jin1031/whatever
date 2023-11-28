@@ -1,0 +1,62 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.7.16'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'zkffl0'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '11'
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// jpa
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	// Spring Security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	//implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+	testImplementation 'org.springframework.security:spring-security-test'
+
+	//JWT
+	implementation "io.jsonwebtoken:jjwt-api:0.11.5"
+	runtimeOnly "io.jsonwebtoken:jjwt-impl:0.11.5"
+	runtimeOnly "io.jsonwebtoken:jjwt-jackson:0.11.5"
+
+	//Swagger
+	implementation("org.springdoc:springdoc-openapi-ui:1.6.11")
+
+	// HTML...?
+	//implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+	//mysql driver
+	runtimeOnly 'com.mysql:mysql-connector-j'
+
+	//lombok
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	//HttpClient
+	implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.13'
+
+	//S3 buket
+	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
+
+}
+
+tasks.named('bootBuildImage') {
+	builder = 'paketobuildpacks/builder-jammy-base:latest'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
