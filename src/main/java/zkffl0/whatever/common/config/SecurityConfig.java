@@ -69,6 +69,7 @@ public class SecurityConfig {
 
                 // 글 쓰기 (개발 단계에서는 누구나 가능하도록 설정 )
                 .antMatchers("/post/**").permitAll()
+                .antMatchers("/comment/**").permitAll()
 
                 // /admin으로 시작하는 요청은 ADMIN 권한이 있는 유저에게만 허용
                 .antMatchers("/admin/**").hasRole("ADMIN")
