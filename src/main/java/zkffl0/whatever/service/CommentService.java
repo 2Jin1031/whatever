@@ -7,11 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.webjars.NotFoundException;
 import zkffl0.whatever.dto.comment.CommentReqDto;
 import zkffl0.whatever.dto.comment.CommentResDto;
-import zkffl0.whatever.dto.comment.CommentReqDto;
-import zkffl0.whatever.dto.comment.CommentResDto;
 import zkffl0.whatever.repository.comment.Comment;
 import zkffl0.whatever.repository.comment.CommentRepository;
-import zkffl0.whatever.repository.comment.Comment;
 
 @Service
 @AllArgsConstructor
@@ -42,5 +39,14 @@ public class CommentService {
 
         commentRepository.save(comment);
         return "업데이트에 성공하였습니다.";
+    }
+
+    public String deleteComment(Long id) throws NotFoundException {
+        Comment comment = commentRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(id + "에 해당하는 글이 존재하지 않습니다."));
+
+
+        commentRepository.deleteById(id);
+        return "글이 삭제되었습니다.";
     }
 }

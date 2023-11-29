@@ -44,4 +44,15 @@ public class CommnetController {
                     .body(e.getMessage());
         }
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteComment(@PathVariable("id") Long id) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(commentService.deleteComment(id));
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(e.getMessage());
+        }
+    }
 }
