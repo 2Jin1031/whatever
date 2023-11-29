@@ -4,13 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.webjars.NotFoundException;
 import zkffl0.whatever.dto.comment.CommentReqDto;
 import zkffl0.whatever.dto.comment.CommentResDto;
-import zkffl0.whatever.dto.post.PostReqDto;
-import zkffl0.whatever.dto.post.PostResDto;
+import zkffl0.whatever.dto.comment.CommentReqDto;
+import zkffl0.whatever.dto.comment.CommentResDto;
 import zkffl0.whatever.repository.comment.Comment;
 import zkffl0.whatever.repository.comment.CommentRepository;
-import zkffl0.whatever.repository.post.Post;
+import zkffl0.whatever.repository.comment.Comment;
 
 @Service
 @AllArgsConstructor
@@ -29,5 +30,17 @@ public class CommentService {
         return CommentResDto.builder()
                 .content(commentReqDto.getContent())
                 .build();
+    }
+
+    public String updateComment(Long id, CommentReqDto commentReqDto) throws NotFoundException {
+        Comment comment = commentRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(id + "에 해당하는 글이 존재하지 않습니다."));
+
+        if (commentReqDto.getContent() != null) {
+            comment.setContent(commentReqDto.getContent());
+        }
+
+        commentRepository.save(comment);
+        return "업데이트에 성공하였습니다.";
     }
 }
