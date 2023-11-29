@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Schema(name = "페이지 정보")
+@Schema(name = "글 정보")
 public class PostReqDto {
 
     @Schema(example = "다들 들어와서 옷 좀 골라줘")

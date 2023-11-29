@@ -1,2 +1,12 @@
-package zkffl0.whatever.service;public class MemberService {
+package zkffl0.whatever.service;
+
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+@Service
+@AllArgsConstructor
+@Slf4j
+public class MemberService {
+
 }
