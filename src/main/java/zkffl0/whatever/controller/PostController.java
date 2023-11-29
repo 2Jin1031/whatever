@@ -43,4 +43,14 @@ public class PostController {
         }
     }
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deletePost(@PathVariable("id") Long id) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(postService.deletePost(id));
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(e.getMessage());
+        }
+    }
 }

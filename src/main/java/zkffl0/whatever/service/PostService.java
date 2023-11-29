@@ -44,4 +44,13 @@ public class PostService {
         postRepository.save(post);
         return "업데이트에 성공하였습니다.";
     }
+
+    public String deletePost(Long id) throws NotFoundException {
+        Post post = postRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(id + "에 해당하는 글이 존재하지 않습니다."));
+
+
+        postRepository.deleteById(id);
+        return "글이 삭제되었습니다.";
+    }
 }
