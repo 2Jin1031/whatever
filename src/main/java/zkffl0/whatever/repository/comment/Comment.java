@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import zkffl0.whatever.repository.post.Post;
 
 import javax.persistence.*;
 
@@ -20,6 +21,10 @@ public class Comment {
 
     @Column(nullable = true)
     private String content;
+
+    @JoinColumn(name = "postId")
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Post post;
 
     public void setContent(String content) {
         this.content = content;
