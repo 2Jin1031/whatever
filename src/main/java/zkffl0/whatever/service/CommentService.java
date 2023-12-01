@@ -9,6 +9,8 @@ import zkffl0.whatever.dto.comment.CommentReqDto;
 import zkffl0.whatever.dto.comment.CommentResDto;
 import zkffl0.whatever.repository.comment.Comment;
 import zkffl0.whatever.repository.comment.CommentRepository;
+import zkffl0.whatever.repository.post.Post;
+import zkffl0.whatever.repository.post.PostRepository;
 
 @Service
 @AllArgsConstructor
@@ -16,11 +18,16 @@ import zkffl0.whatever.repository.comment.CommentRepository;
 public class CommentService {
 
     private final CommentRepository commentRepository;
+    private final PostRepository postRepository;
 
     @Transactional
-    public CommentResDto createComment(CommentReqDto commentReqDto) {
+    // TODO: post id 추가했으니 comment랑 연결
+    public CommentResDto createComment(Long id, CommentReqDto commentReqDto) throws NotFoundException{
+        Post post = postRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(id + "에 해당하는 글이 존재하지 않습니다."));
         Comment comment = Comment.builder()
                 .content(commentReqDto.getContent())
+                .post(post)
                 .build();
 
         commentRepository.save(comment);
