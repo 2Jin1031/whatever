@@ -38,7 +38,7 @@ public class CommentService {
 
     public String updateComment(Long commentId, CommentReqDto commentReqDto) throws NotFoundException {
         Comment comment = commentRepository.findById(commentId)
-                .orElseThrow(() -> new NotFoundException(commentId + "에 해당하는 글이 존재하지 않습니다."));
+                .orElseThrow(() -> new NotFoundException(commentId + "에 해당하는 댓글이 존재하지 않습니다."));
 
         if (commentReqDto.getContent() != null) {
             comment.setContent(commentReqDto.getContent());
@@ -49,11 +49,11 @@ public class CommentService {
     }
 
     public String deleteComment(Long commentId) throws NotFoundException {
-        Comment comment = commentRepository.findById(commentId)
-                .orElseThrow(() -> new NotFoundException(commentId + "에 해당하는 글이 존재하지 않습니다."));
+        commentRepository.findById(commentId)
+                .orElseThrow(() -> new NotFoundException(commentId + "에 해당하는 댓글이 존재하지 않습니다."));
 
 
         commentRepository.deleteById(commentId);
-        return "글이 삭제되었습니다.";
+        return "댓글이 삭제되었습니다.";
     }
 }
