@@ -21,7 +21,7 @@ public class PostController {
 
     @RegisterResApi
     @RegisterReqApi
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<?> createPost(@RequestBody PostReqDto postReqDto) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED) // PostMapping - HttpStatus.CREATED, GetMapping, PutMapping - HttpStatus.ok
@@ -32,8 +32,8 @@ public class PostController {
         }
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<?> updatePost(@PathVariable("id") Long id, @RequestBody PostReqDto postReqDto) {
+    @PutMapping("/{post_id}")
+    public ResponseEntity<?> updatePost(@PathVariable("post_id") Long id, @RequestBody PostReqDto postReqDto) {
         try {
             return ResponseEntity.status(HttpStatus.OK)
                     .body(postService.updatePost(id, postReqDto));
@@ -43,8 +43,8 @@ public class PostController {
         }
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deletePost(@PathVariable("id") Long id) {
+    @DeleteMapping("/{post_id}")
+    public ResponseEntity<?> deletePost(@PathVariable("post_id") Long id) {
         try {
             return ResponseEntity.status(HttpStatus.OK)
                     .body(postService.deletePost(id));

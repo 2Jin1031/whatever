@@ -22,9 +22,9 @@ public class CommentService {
 
     @Transactional
     // TODO: post id 추가했으니 comment랑 연결
-    public CommentResDto createComment(Long id, CommentReqDto commentReqDto) throws NotFoundException{
-        Post post = postRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(id + "에 해당하는 글이 존재하지 않습니다."));
+    public CommentResDto createComment(Long postId, CommentReqDto commentReqDto) throws NotFoundException{
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new NotFoundException(postId + "에 해당하는 글이 존재하지 않습니다."));
         Comment comment = Comment.builder()
                 .content(commentReqDto.getContent())
                 .post(post)
@@ -36,9 +36,9 @@ public class CommentService {
                 .build();
     }
 
-    public String updateComment(Long id, CommentReqDto commentReqDto) throws NotFoundException {
-        Comment comment = commentRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(id + "에 해당하는 글이 존재하지 않습니다."));
+    public String updateComment(Long commentId, CommentReqDto commentReqDto) throws NotFoundException {
+        Comment comment = commentRepository.findById(commentId)
+                .orElseThrow(() -> new NotFoundException(commentId + "에 해당하는 글이 존재하지 않습니다."));
 
         if (commentReqDto.getContent() != null) {
             comment.setContent(commentReqDto.getContent());
@@ -48,12 +48,12 @@ public class CommentService {
         return "업데이트에 성공하였습니다.";
     }
 
-    public String deleteComment(Long id) throws NotFoundException {
-        Comment comment = commentRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(id + "에 해당하는 글이 존재하지 않습니다."));
+    public String deleteComment(Long commentId) throws NotFoundException {
+        Comment comment = commentRepository.findById(commentId)
+                .orElseThrow(() -> new NotFoundException(commentId + "에 해당하는 글이 존재하지 않습니다."));
 
 
-        commentRepository.deleteById(id);
+        commentRepository.deleteById(commentId);
         return "글이 삭제되었습니다.";
     }
 }

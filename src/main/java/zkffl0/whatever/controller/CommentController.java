@@ -21,8 +21,8 @@ public class CommentController {
 
     @RegisterResApi
     @RegisterReqApi
-    @PostMapping("/create/{id}")
-    public ResponseEntity<?> createComment(@PathVariable("id") Long id, @RequestBody CommentReqDto commentReqDto) {
+    @PostMapping("/{post_id}")
+    public ResponseEntity<?> createComment(@PathVariable("post_id") Long id, @RequestBody CommentReqDto commentReqDto) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED) // CommentMapping - HttpStatus.CREATED, GetMapping, PutMapping - HttpStatus.ok
                     .body(commentService.createComment(id, commentReqDto));
@@ -32,8 +32,8 @@ public class CommentController {
         }
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<?> updateComment(@PathVariable("id") Long id, @RequestBody CommentReqDto commentReqDto) {
+    @PutMapping("/{comment_id}")
+    public ResponseEntity<?> updateComment(@PathVariable("comment_id") Long id, @RequestBody CommentReqDto commentReqDto) {
         try {
             return ResponseEntity.status(HttpStatus.OK)
                     .body(commentService.updateComment(id, commentReqDto));
@@ -43,8 +43,8 @@ public class CommentController {
         }
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteComment(@PathVariable("id") Long id) {
+    @DeleteMapping("/{comment_id}")
+    public ResponseEntity<?> deleteComment(@PathVariable("comment_id") Long id) {
         try {
             return ResponseEntity.status(HttpStatus.OK)
                     .body(commentService.deleteComment(id));
