@@ -1,6 +1,7 @@
 package zkffl0.whatever.repository.post;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -29,6 +30,7 @@ public class Post {
     private String content;
 
     @OneToMany(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    //@JsonIgnore
     private List<Comment> comments = new ArrayList<>();
 
     public void setTitle(String title) {

@@ -21,7 +21,6 @@ public class CommentService {
     private final PostRepository postRepository;
 
     @Transactional
-    // TODO: post id 추가했으니 comment랑 연결
     public CommentResDto createComment(Long postId, CommentReqDto commentReqDto) throws NotFoundException{
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new NotFoundException(postId + "에 해당하는 글이 존재하지 않습니다."));
@@ -56,4 +55,5 @@ public class CommentService {
         commentRepository.deleteById(commentId);
         return "댓글이 삭제되었습니다.";
     }
+
 }

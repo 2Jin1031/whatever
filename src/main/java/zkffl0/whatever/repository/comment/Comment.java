@@ -1,5 +1,6 @@
 package zkffl0.whatever.repository.comment;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,6 +25,7 @@ public class Comment {
 
     @JoinColumn(name = "postId")
     @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnore
     private Post post;
 
     public void setContent(String content) {

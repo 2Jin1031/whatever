@@ -19,6 +19,7 @@ public class PostController {
 
     private final PostService postService;
 
+    /**   글 생성하기   */
     @RegisterResApi
     @RegisterReqApi
     @PostMapping
@@ -32,6 +33,7 @@ public class PostController {
         }
     }
 
+    /**   글 수정하기   */
     @PutMapping("/{post_id}")
     public ResponseEntity<?> updatePost(@PathVariable("post_id") Long id, @RequestBody PostReqDto postReqDto) {
         try {
@@ -43,11 +45,24 @@ public class PostController {
         }
     }
 
+    /**  글 삭제하기   */
     @DeleteMapping("/{post_id}")
     public ResponseEntity<?> deletePost(@PathVariable("post_id") Long id) {
         try {
             return ResponseEntity.status(HttpStatus.OK)
                     .body(postService.deletePost(id));
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(e.getMessage());
+        }
+    }
+
+    /**   글에 딸린 댓글들 조회하기   */
+    @GetMapping("/{post_id}")
+    public ResponseEntity<?> inquireComments(@PathVariable("post_id") Long id) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(postService.inquireComments(id));
         } catch (NotFoundException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(e.getMessage());
