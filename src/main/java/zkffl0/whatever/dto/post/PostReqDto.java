@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -16,4 +18,7 @@ public class PostReqDto {
 
     @Schema(example = "1번, 2번 중에 뭐가 나아??")
     private String content;
+
+    @Schema(example = "2023-11-17T23:00:00")
+    private LocalDateTime useTime;
 }

@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -15,4 +17,7 @@ public class CommentResDto {
 
     @Schema(example = "나는 1번 ㄱㄱ")
     private String content;
+
+    @Schema(example = "2023-11-17T23:00:00")
+    private LocalDateTime useTime;
 }
