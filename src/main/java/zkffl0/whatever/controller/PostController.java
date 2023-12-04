@@ -11,6 +11,8 @@ import zkffl0.whatever.service.PostService;
 import zkffl0.whatever.utils.swagger.account.RegisterReqApi;
 import zkffl0.whatever.utils.swagger.account.RegisterResApi;
 
+import javax.validation.constraints.Min;
+
 @Tag(name = "글", description = "글과 관련된 모든 것")
 @RestController
 @RequiredArgsConstructor
@@ -19,7 +21,9 @@ public class PostController {
 
     private final PostService postService;
 
-    /**   글 생성하기   */
+    /**
+     * 글 생성하기
+     */
     @RegisterResApi
     @RegisterReqApi
     @PostMapping
@@ -33,7 +37,9 @@ public class PostController {
         }
     }
 
-    /**   글 수정하기   */
+    /**
+     * 글 수정하기
+     */
     @PutMapping("/{post_id}")
     public ResponseEntity<?> updatePost(@PathVariable("post_id") Long id, @RequestBody PostReqDto postReqDto) {
         try {
@@ -45,7 +51,9 @@ public class PostController {
         }
     }
 
-    /**  글 삭제하기   */
+    /**
+     * 글 삭제하기
+     */
     @DeleteMapping("/{post_id}")
     public ResponseEntity<?> deletePost(@PathVariable("post_id") Long id) {
         try {
@@ -57,7 +65,9 @@ public class PostController {
         }
     }
 
-    /**   글에 딸린 댓글들 조회하기   */
+    /**
+     * 글에 딸린 댓글들 조회하기
+     */
     @GetMapping("/{post_id}")
     public ResponseEntity<?> inquireComments(@PathVariable("post_id") Long id) {
         try {
@@ -67,5 +77,16 @@ public class PostController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(e.getMessage());
         }
+    }
+
+    /**
+     * 페이징 처리된 글들 조회하기
+     */
+    @GetMapping("infos")
+    public ResponseEntity<?> inquirePosts(@RequestParam("page") @Min(0) int page,
+                                          @RequestParam("size") @Min(0) int size) {
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(postService.inquirePosts(page, size));
     }
 }

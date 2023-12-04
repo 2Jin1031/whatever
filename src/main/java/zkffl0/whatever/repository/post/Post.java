@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import zkffl0.whatever.repository.comment.Comment;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,8 +30,10 @@ public class Post {
     @Column(nullable = true)
     private String content;
 
+    @Column(nullable = false)
+    private LocalDateTime useTime;
+
     @OneToMany(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    //@JsonIgnore
     private List<Comment> comments = new ArrayList<>();
 
     public void setTitle(String title) {

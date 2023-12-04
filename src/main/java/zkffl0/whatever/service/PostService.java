@@ -1,10 +1,16 @@
 package zkffl0.whatever.service;
 
+import com.sun.xml.bind.v2.TODO;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.webjars.NotFoundException;
+import zkffl0.whatever.dto.PageInfo;
+import zkffl0.whatever.dto.post.PostInfoPageResDto;
 import zkffl0.whatever.dto.post.PostReqDto;
 import zkffl0.whatever.dto.post.PostResDto;
 import zkffl0.whatever.repository.comment.Comment;
@@ -14,6 +20,7 @@ import zkffl0.whatever.repository.post.PostRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -28,12 +35,14 @@ public class PostService {
         Post post = Post.builder()
                 .title(postReqDto.getTitle())
                 .content(postReqDto.getContent())
+                .useTime(postReqDto.getUseTime())
                 .build();
 
         postRepository.save(post);
         return PostResDto.builder()
                 .title(postReqDto.getTitle())
                 .content(postReqDto.getContent())
+                .useTime(postReqDto.getUseTime())
                 .build();
     }
 
@@ -72,5 +81,25 @@ public class PostService {
         }
 
         return comments;
+    }
+
+    // TODO: postInfos에 데이터가 안 들어가 있는 점
+    public PostInfoPageResDto inquirePosts(int page, int size) {
+        Page<Post> postPages = postRepository.findAll(PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "useTime")));
+
+        PageInfo pageInfo = PageInfo.builder()
+                .page(page)
+                .pageSize(size)
+                .totalPages(postPages.getTotalPages())
+                .totalNumber(postPages.getTotalElements())
+                .build();
+
+        List<PostResDto> postInfos = postPages.getContent()
+                .stream().map(o->new PostResDto(o)).collect(Collectors.toList());
+
+        return PostInfoPageResDto.builder()
+                .postInfos(postInfos)
+                .pageInfo(pageInfo)
+                .build();
     }
 }

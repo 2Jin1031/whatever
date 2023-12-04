@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import zkffl0.whatever.repository.post.Post;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,6 +23,9 @@ public class Comment {
 
     @Column(nullable = true)
     private String content;
+
+    @Column(nullable = false)
+    private LocalDateTime useTime;
 
     @JoinColumn(name = "postId")
     @ManyToOne(fetch = FetchType.EAGER)

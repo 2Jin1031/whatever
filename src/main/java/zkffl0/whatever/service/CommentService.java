@@ -26,12 +26,14 @@ public class CommentService {
                 .orElseThrow(() -> new NotFoundException(postId + "에 해당하는 글이 존재하지 않습니다."));
         Comment comment = Comment.builder()
                 .content(commentReqDto.getContent())
+                .useTime(commentReqDto.getUseTime())
                 .post(post)
                 .build();
 
         commentRepository.save(comment);
         return CommentResDto.builder()
                 .content(commentReqDto.getContent())
+                .useTime(commentReqDto.getUseTime())
                 .build();
     }
 
