@@ -8,8 +8,8 @@ import lombok.Getter;
 @AllArgsConstructor
 @Builder
 public class PageInfo {
-    private int page;
-    private int pageSize;
+    private int page; // 조회하려는 페이지 번호
+    private int pageSize; // 한 페이지당 표시할 항목 수
     private Long totalNumber;
     private int totalPages;
 }

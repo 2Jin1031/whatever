@@ -83,9 +83,8 @@ public class PostService {
         return comments;
     }
 
-    // TODO: postInfos에 데이터가 안 들어가 있는 점
     public PostInfoPageResDto inquirePosts(int page, int size) {
-        Page<Post> postPages = postRepository.findAll(PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "useTime")));
+        Page<Post> postPages = postRepository.findAll(PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "useTime"))); // useTime을 기준으로 내림차순 정렬
 
         PageInfo pageInfo = PageInfo.builder()
                 .page(page)
@@ -94,8 +93,8 @@ public class PostService {
                 .totalNumber(postPages.getTotalElements())
                 .build();
 
-        List<PostResDto> postInfos = postPages.getContent()
-                .stream().map(o->new PostResDto(o)).collect(Collectors.toList());
+        List<PostResDto> postInfos = postPages.getContent() //  getContent() : Spring Data JPA에서 페이징된 결과에서 현재 페이지의 데이터를 가져오는 메서드
+                .stream().map(o->new PostResDto(o)).collect(Collectors.toList()); // 각각의 게시물(Post)을 해당 게시물 정보 전송 객체(PostResDto)로 변환, 변환된 PostResDto를 리스트로 수집
 
         return PostInfoPageResDto.builder()
                 .postInfos(postInfos)
