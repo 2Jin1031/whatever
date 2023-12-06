@@ -21,4 +21,7 @@ public class PostReqDto {
 
     @Schema(example = "2023-11-17T23:00:00")
     private LocalDateTime useTime;
+
+    @Schema(example = "2")
+    private int view;
 }

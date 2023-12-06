@@ -24,15 +24,20 @@ public class PostResDto {
     @Schema(example = "2023-11-17T23:00:00")
     private LocalDateTime useTime;
 
-    public PostResDto(String title, String content, LocalDateTime useTime) {
+    @Schema(example = "2")
+    private int view;
+
+    public PostResDto(String title, String content, LocalDateTime useTime, int view) {
         this.title = title;
         this.content = content;
         this.useTime = useTime;
+        this.view = view;
     }
 
     public PostResDto(Post post) {
         this.title = post.getTitle();
         this.content = post.getContent();
         this.useTime = post.getUseTime();
+        this.view = post.getView();
     }
 }

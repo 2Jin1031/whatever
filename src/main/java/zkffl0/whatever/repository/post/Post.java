@@ -33,6 +33,9 @@ public class Post {
     @Column(nullable = false)
     private LocalDateTime useTime;
 
+    @Column(columnDefinition = "integer default 0", nullable = false)
+    private int view; // 조회수
+
     @OneToMany(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
@@ -42,5 +45,9 @@ public class Post {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public void setView(int view) {
+        this.view = view;
     }
 }

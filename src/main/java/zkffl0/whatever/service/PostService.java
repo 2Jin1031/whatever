@@ -101,4 +101,16 @@ public class PostService {
                 .pageInfo(pageInfo)
                 .build();
     }
+
+    public Post getPost(Long id) {
+        Optional<Post> post = this.postRepository.findById(id);
+        if (post.isPresent()) {
+            Post post1 = post.get();
+            post1.setView(post1.getView() + 1);
+            this.postRepository.save(post1);
+            return post1;
+        } else {
+            throw new NotFoundException("post not found");
+        }
+    }
 }
