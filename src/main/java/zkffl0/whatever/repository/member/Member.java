@@ -38,12 +38,15 @@ public class Member {
     private Long birth;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private CarrierType carrier; // 통신사 종류
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private SexType sex;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private CitizenShipType citizenShip;
 
     @Column(nullable = false)
