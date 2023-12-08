@@ -9,4 +9,5 @@ import java.util.Optional;
 public interface ThumbRepository extends JpaRepository<Thumb, Long> {
 
     Optional<Thumb> findByMemberAndPost(Member member, Post post);
+    int countByPost(Post post);
 }

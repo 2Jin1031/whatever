@@ -7,7 +7,7 @@ import zkffl0.whatever.repository.post.PostRepository;
 
 import java.time.LocalDateTime;
 
-//@AllArgsConstructor
+@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
@@ -27,12 +27,8 @@ public class PostResDto {
     @Schema(example = "2")
     private int view;
 
-    public PostResDto(String title, String content, LocalDateTime useTime, int view) {
-        this.title = title;
-        this.content = content;
-        this.useTime = useTime;
-        this.view = view;
-    }
+    @Schema(example = "3")
+    private int thumbCnt;
 
     public PostResDto(Post post) {
         this.title = post.getTitle();

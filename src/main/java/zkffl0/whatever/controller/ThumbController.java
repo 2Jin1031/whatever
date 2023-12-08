@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import zkffl0.whatever.dto.thumb.ThumbReqDto;
+import zkffl0.whatever.repository.post.Post;
 import zkffl0.whatever.service.ThumbService;
 
 import javax.validation.Valid;
@@ -31,4 +32,11 @@ public class ThumbController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(thumbService.delete(thumbReqDto));
     }
+
+//    @GetMapping
+//    public ResponseEntity<?> updateThumbCount(@RequestBody @Valid Post post) {
+//
+//        return ResponseEntity.status(HttpStatus.OK)
+//                .body(thumbService.updateThumbCount(post));
+//    }
 }

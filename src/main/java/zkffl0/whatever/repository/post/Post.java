@@ -36,6 +36,9 @@ public class Post {
     @Column(columnDefinition = "integer default 0", nullable = false)
     private int view; // 조회수
 
+    @Column(nullable = true)
+    private int thumbCnt;
+
     @OneToMany(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
@@ -49,5 +52,9 @@ public class Post {
 
     public void setView(int view) {
         this.view = view;
+    }
+
+    public void setThumbCnt(int thumbCnt) {
+        this.thumbCnt = thumbCnt;
     }
 }

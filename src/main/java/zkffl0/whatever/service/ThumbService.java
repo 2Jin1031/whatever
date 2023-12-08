@@ -42,6 +42,8 @@ public class ThumbService {
                 .build();
 
         thumbRepository.save(thumb);
+        updateThumbCount(post);
+        postRepository.updateThumbCnt(post, true);
 
         return ThumbResDto.builder()
                 .postId(post.getId())
@@ -59,10 +61,19 @@ public class ThumbService {
                 .orElseThrow(() -> new NotFoundException("Could not found member id: " + thumbReqDto.getPostId()));
 
         Thumb thumb = thumbRepository.findByMemberAndPost(member, post)
+                .stream().findFirst()
                 .orElseThrow(() -> new NotFoundException("Could not found member thumb id"));
 
         thumbRepository.delete(thumb);
+        updateThumbCount(post);
+        postRepository.updateThumbCnt(post, false);
 
         return "좋아요가 취소 되었습니다.";
+    }
+
+    private void updateThumbCount(Post post) {
+        int thumbCount = thumbRepository.countByPost(post);
+        post.setThumbCnt(thumbCount);
+        postRepository.save(post);
     }
 }

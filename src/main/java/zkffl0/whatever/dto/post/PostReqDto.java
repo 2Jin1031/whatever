@@ -24,4 +24,7 @@ public class PostReqDto {
 
     @Schema(example = "2")
     private int view;
+
+    @Schema(example = "3")
+    private int thumbCnt;
 }
