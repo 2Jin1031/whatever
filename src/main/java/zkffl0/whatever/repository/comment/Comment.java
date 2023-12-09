@@ -28,7 +28,7 @@ public class Comment {
     private LocalDateTime useTime;
 
     @JoinColumn(name = "postId")
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
     private Post post;
 

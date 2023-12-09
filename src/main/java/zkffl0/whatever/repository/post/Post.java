@@ -39,6 +39,9 @@ public class Post {
     @Column(nullable = true)
     private int thumbCnt;
 
+    @Column(nullable = true)
+    private int commentCnt;
+
     @OneToMany(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
@@ -57,4 +60,6 @@ public class Post {
     public void setThumbCnt(int thumbCnt) {
         this.thumbCnt = thumbCnt;
     }
+
+
 }

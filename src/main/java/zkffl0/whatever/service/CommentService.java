@@ -31,6 +31,7 @@ public class CommentService {
                 .build();
 
         commentRepository.save(comment);
+        postRepository.updateCommentCnt(post, true);
         return CommentResDto.builder()
                 .content(commentReqDto.getContent())
                 .useTime(commentReqDto.getUseTime())
@@ -46,6 +47,7 @@ public class CommentService {
         }
 
         commentRepository.save(comment);
+
         return "업데이트에 성공하였습니다.";
     }
 
@@ -55,6 +57,7 @@ public class CommentService {
 
 
         commentRepository.deleteById(commentId);
+        postRepository.updateCommentCnt(postRepository.findByCommentId(commentId), false);
         return "댓글이 삭제되었습니다.";
     }
 
