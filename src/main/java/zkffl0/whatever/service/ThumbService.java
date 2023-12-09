@@ -42,7 +42,6 @@ public class ThumbService {
                 .build();
 
         thumbRepository.save(thumb);
-        updateThumbCount(post);
         postRepository.updateThumbCnt(post, true);
 
         return ThumbResDto.builder()
@@ -65,7 +64,7 @@ public class ThumbService {
                 .orElseThrow(() -> new NotFoundException("Could not found member thumb id"));
 
         thumbRepository.delete(thumb);
-        updateThumbCount(post);
+        // TODO : 희찬 질문 로직
         postRepository.updateThumbCnt(post, false);
 
         return "좋아요가 취소 되었습니다.";

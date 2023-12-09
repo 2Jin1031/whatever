@@ -32,11 +32,4 @@ public class ThumbController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(thumbService.delete(thumbReqDto));
     }
-
-//    @GetMapping
-//    public ResponseEntity<?> updateThumbCount(@RequestBody @Valid Post post) {
-//
-//        return ResponseEntity.status(HttpStatus.OK)
-//                .body(thumbService.updateThumbCount(post));
-//    }
 }
