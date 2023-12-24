@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import org.webjars.NotFoundException;
 import zkffl0.whatever.common.exception.MemberDuplicateException;
 import zkffl0.whatever.dto.comment.CommentReqDto;
+import zkffl0.whatever.dto.member.sign_up.SignUpReqDto;
+import zkffl0.whatever.dto.member.sign_up.SignUpResDto;
 import zkffl0.whatever.dto.post.PostReqDto;
 import zkffl0.whatever.service.CommentService;
 import zkffl0.whatever.service.MemberService;
