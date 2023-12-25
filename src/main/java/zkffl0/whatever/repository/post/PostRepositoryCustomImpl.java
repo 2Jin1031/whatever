@@ -1,6 +1,8 @@
 package zkffl0.whatever.repository.post;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -56,24 +58,23 @@ public class PostRepositoryCustomImpl implements PostRepositoryCustom {
         }
     }
 
-    // TODO: findByCommentId 로 post를 잘 못찾는 듯 -> null
     @Override
     @Transactional
     public Post findByCommentId(Long commentId) {
         String jpql = "SELECT c.post FROM Comment c WHERE c.id = :commentId";
 
-        List<Post> result = entityManager.createQuery(jpql, Post.class)
-                .setParameter("commentId", commentId)
-                .getResultList();
+        try {
+            Post result = entityManager.createQuery(jpql, Post.class)
+                    .setParameter("commentId", commentId)
+                    .getSingleResult();
 
-        if (result.isEmpty()) {
+            return result;
+        } catch (NoResultException e) {
             // Handle the case where no post is found for the given commentId
             return null; // or throw an exception
-        } else if (result.size() > 1) {
-            // Handle the case where multiple posts are found for the given commentId (optional)
+        } catch (NonUniqueResultException e) {
+            // Handle the case where multiple posts are found for the given commentId
             throw new RuntimeException("Multiple posts found for comment with ID: " + commentId);
-        } else {
-            return result.get(0);
         }
     }
 }

@@ -56,8 +56,8 @@ public class CommentService {
                 .orElseThrow(() -> new NotFoundException(commentId + "에 해당하는 댓글이 존재하지 않습니다."));
 
 
-        commentRepository.deleteById(commentId);
         postRepository.updateCommentCnt(postRepository.findByCommentId(commentId), false);
+        commentRepository.deleteById(commentId);
         return "댓글이 삭제되었습니다.";
     }
 
