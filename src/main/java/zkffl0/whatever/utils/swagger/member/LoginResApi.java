@@ -1,4 +1,4 @@
-package com.halo.hamso.utils.swagger.auth;
+package zkffl0.whatever.utils.swagger.member;
 
 
 import io.swagger.v3.oas.annotations.media.Content;
@@ -17,11 +17,9 @@ import java.lang.annotation.RetentionPolicy;
                         examples = {
                                 @ExampleObject(name = "성공 예제",
                                         value = "{\"memberId\": 1, " +
-                                                "\"phoneNo\": \"01099267107\", " +
-                                                "\"name\": \"안희찬\", " +
-                                                "\"token\": \"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIwMDAxMiIsInJvbGVzIjpbeyJpZCI6MSwibmFtZSI6IlJPTEVfVVNFUiJ9XSwiaWF0IjoxNzAwMjM2NzA0LCJleHAiOjE3MDAyMzY3OTF9.XqCkaec3Cb030a5bjcn1w6q-HvNZPnlaWj2Dkhv7zX0\", " +
-                                                "\"role\": \"ROLE_USER\", " +
-                                                "\"businessId\": null}",
+                                                "\"phoneNo\": \"01012345678\", " +
+                                                "\"name\": \"김익명\", " +
+                                                "\"token\": \"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIwMDAxMiIsInJvbGVzIjpbeyJpZCI6MSwibmFtZSI6IlJPTEVfVVNFUiJ9XSwiaWF0IjoxNzAwMjM2NzA0LCJleHAiOjE3MDAyMzY3OTF9.XqCkaec3Cb030a5bjcn1w6q-HvNZPnlaWj2Dkhv7zX0\"}",
                                         summary = "성공 예제", description = "회원 정보를 성공적으로 조회한 경우의 예제입니다.")
                         })),
         @ApiResponse(responseCode = "404", description = "요청이 실패한 경우.",
