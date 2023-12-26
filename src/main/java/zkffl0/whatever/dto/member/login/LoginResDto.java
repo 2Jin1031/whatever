@@ -1,4 +1,4 @@
-package com.halo.hamso.dto.member.login;
+package zkffl0.whatever.dto.member.login;
 
 
 import lombok.AllArgsConstructor;
