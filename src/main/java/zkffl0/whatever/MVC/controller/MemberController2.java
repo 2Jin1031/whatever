@@ -2,11 +2,15 @@ package zkffl0.whatever.MVC.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import zkffl0.whatever.API.repository.member.Member;
 import zkffl0.whatever.MVC.domain.Member2;
 import zkffl0.whatever.MVC.domain.MemberForm;
 import zkffl0.whatever.MVC.service.MemberService2;
+
+import java.util.List;
 
 @Controller
 public class MemberController2 {
@@ -28,8 +32,19 @@ public class MemberController2 {
         Member2 member = new Member2();
         member.setName(form.getName());
 
-        memberService.join(member);
+        try {
+            memberService.join(member);
+        } catch (IllegalStateException e) {
+            return "members/validateDuplicateMember";
+        }
 
         return "redirect:/";
+    }
+
+    @GetMapping("/members")
+    public String list(Model model) {
+        List<Member2> members = memberService.findMembers();
+        model.addAttribute("members", members);
+        return "members/memberList";
     }
 }

@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import zkffl0.whatever.MVC.domain.Member2;
 import zkffl0.whatever.MVC.repository.MemberRepository2;
 
+import java.util.List;
+
 @Service
 public class MemberService2 {
 
@@ -26,5 +28,9 @@ public class MemberService2 {
                 .ifPresent(m -> {
                     throw new IllegalStateException("이미 존재하는 회원입니다.");
                 });
+    }
+
+    public List<Member2> findMembers() {
+        return memberRepository.findAll();
     }
 }
