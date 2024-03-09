@@ -35,7 +35,11 @@ public class MemberController2 {
         try {
             memberService.join(member);
         } catch (IllegalStateException e) {
-            return "members/validateDuplicateMember";
+            if (e.getMessage().equals("이미 존재하는 회원입니다.")) {
+                return "members/validateDuplicateMember";
+            } else if (e.getMessage().equals("이름이 입력되지 않았습니다.")) {
+                return "members/emptyMemberName";
+            }
         }
 
         return "redirect:/";

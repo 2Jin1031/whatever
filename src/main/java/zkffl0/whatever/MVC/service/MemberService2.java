@@ -18,9 +18,16 @@ public class MemberService2 {
     }
 
     public Long join(Member2 member2) {
+        emptyMemberName(member2);
         validateDuplicateMember(member2); // 중복 회원 검증
         memberRepository.save(member2);
         return member2.getId();
+    }
+
+    private static void emptyMemberName(Member2 member2) {
+        if (member2.getName().isEmpty()) {
+            throw new IllegalStateException("이름이 입력되지 않았습니다.");
+        }
     }
 
     private void validateDuplicateMember(Member2 member2) {
