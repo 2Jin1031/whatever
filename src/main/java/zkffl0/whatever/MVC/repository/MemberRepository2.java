@@ -1,6 +1,6 @@
 package zkffl0.whatever.MVC.repository;
 
-import zkffl0.whatever.MVC.domain.Member2;
+import zkffl0.whatever.MVC.domain.member.Member2;
 
 import java.util.List;
 import java.util.Optional;

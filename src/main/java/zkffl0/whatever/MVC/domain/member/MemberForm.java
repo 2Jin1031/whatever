@@ -1,4 +1,4 @@
-package zkffl0.whatever.MVC.domain;
+package zkffl0.whatever.MVC.domain.member;
 
 public class MemberForm {
 

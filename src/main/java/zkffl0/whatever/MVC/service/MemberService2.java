@@ -2,7 +2,7 @@ package zkffl0.whatever.MVC.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import zkffl0.whatever.MVC.domain.Member2;
+import zkffl0.whatever.MVC.domain.member.Member2;
 import zkffl0.whatever.MVC.repository.MemberRepository2;
 
 import java.util.List;

@@ -5,9 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import zkffl0.whatever.API.repository.member.Member;
-import zkffl0.whatever.MVC.domain.Member2;
-import zkffl0.whatever.MVC.domain.MemberForm;
+import zkffl0.whatever.MVC.domain.member.Member2;
+import zkffl0.whatever.MVC.domain.member.MemberForm;
 import zkffl0.whatever.MVC.service.MemberService2;
 
 import java.util.List;
